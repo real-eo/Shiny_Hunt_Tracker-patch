@@ -2,7 +2,7 @@
 
 **THIS REPO WAS FORKED FROM [adamsb0303s SHINY HUNT TRACKER](https://github.com/adamsb0303/Shiny_Hunt_Tracker)!**
 
-Almost all of the source was written by adamb0303, so credit to him. My edits are highlighted with comments. There is also a more detailed guide on how to use the program in his repo's readme.md. All the changes made by me should be seemless unless specified.
+Almost all of the source was written by adamb0303, so credit to him. My edits are highlighted with comments. There is also a more detailed guide on how to use the program in his repo's README.md. All the changes made by me should be seemless unless specified.
 
 <h2>Why the fork?</h2>
 

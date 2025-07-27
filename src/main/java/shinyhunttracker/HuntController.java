@@ -32,6 +32,10 @@ import java.util.Vector;
 
 import static shinyhunttracker.CustomWindowElements.*;
 
+//                                                                                                  | ADDED BY: real-eo
+import shinyhunttracker.GlobalKeyListener;
+//                                                                                                  | END
+
 public class HuntController {
     static Stage huntControls = new Stage();
     static ScrollPane huntControlsScroll = new ScrollPane();
@@ -167,15 +171,23 @@ public class HuntController {
         keyBinding.setOnAction(e -> keyBindingSettings());
         previouslyCaught.setOnAction(e -> PreviouslyCaught.previouslyCaughtPokemonSettings());
 
+        
         //Listener for KeyBinds
-        huntControlsScene.setOnKeyPressed(e -> {
-            for(int i = windowsList.size() - 1; i >= 0 ; i--){
-                if (windowsList.get(i).getKeyBinding() == e.getCode())
-                    windowsList.get(i).incrementEncounters();
-                saveHuntOrder();
-            }
-        });
+        // ! WARNING: Brainlet code ahead 💩💩💩
+        // huntControlsScene.setOnKeyPressed(e -> {
+        //     for(int i = windowsList.size() - 1; i >= 0 ; i--){
+        //         if (windowsList.get(i).getKeyBinding() == e.getCode())
+        //             windowsList.get(i).incrementEncounters();
+        //         saveHuntOrder();
+        //     }
+        // });
+        // !
 
+        //                                                                                                  | ADDED BY: real-eo
+        // Start global key listener for handling input 
+        GlobalKeyListener.getInstance().startListening();
+        //                                                                                                  | END
+            
         //Opens pop up for Selection Window
         addHunt.setOnAction(e -> {
             //check save data file for previous saves
@@ -197,8 +209,13 @@ public class HuntController {
         //Make window draggable
         makeDraggable(huntControlsScene);
 
+        // ! I'm not convinced this code handles closing the program in a good matter at ALL 😭🙏🙏
         //Makes sure to save all currently open hunts before closing
         huntControls.setOnCloseRequest(e -> {
+            //                                                                                                  | ADDED BY: real-eo
+            GlobalKeyListener.getInstance().stopListening();
+            //                                                                                                  | END
+
             System.exit(0);
         });
     }
@@ -904,6 +921,9 @@ public class HuntController {
                 keyField.setOnKeyPressed(f -> {
                     keyField.setText(f.getCode().toString());
                     keyBindsTemp.set(index, f.getCode());
+                    //                                                                                                  | ADDED BY: real-eo
+                    GlobalKeyListener.Actions.warnIfBlacklistedKeybindUsed(f.getCode());   
+                    //                                                                                                  | END
                 });
             }
 
